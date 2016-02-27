@@ -58,44 +58,8 @@ departments.update(Set(meteo_data_2012['Dep'].unique() ) )
 wind_directions = Set(meteo_data_2011['Wind'].unique())
 wind_directions.update(Set(meteo_data_2012['Wind'].unique()))
 
-#%%
-#mean_precip_2011 = np.mean(meteo_data_2011[:][i_precip])
-#mean_temp_2011 = np.mean(meteo_data_2011[:][i_temp])
-#mean_wind_2011 = np.mean(meteo_data_2011[:][i_wind_dir])
-#mean_press_2011 = np.mean(meteo_data_2011[:][i_pressure_hpa])
-
-#mean_precip_2012 = np.mean(meteo_data_2012[:][i_precip])
-#mean_temp_2012 = np.mean(meteo_data_2012[:][i_temp])
-#mean_wind_2012 = np.mean(meteo_data_2012[:][i_wind_dir])
-#mean_press_2012 = np.mean(meteo_data_2012[:][i_pressure_hpa])
 
 
-
-#%% Train Data Reading
-train_data = pd.read_csv("clean_data.csv", nrows = 10)
-
-#%%
-def delUnUsefulFeatures(data, feat_set):
-    for s in feat_set : 
-        data.drop(s, axis=1, inplace=True);
-    return data
-
-#%% Drop Unuseful features
-unuseful_features = [ "DAY_DS", "SPLIT_COD", "ACD_COD", "ACD_LIB", "ASS_SOC_MERE", "ASS_ASSIGNMENT", "ASS_DIRECTORSHIP", "ASS_PARTNER", "ASS_POLE", "ASS_COMENT"]
-
-train_data = delUnUsefulFeatures(train_data, unuseful_features)
-
-#%%
-def toCategorical(data, catName):
-    dummies = pd.get_dummies(data[catName])
-    data = pd.concat( [data, dummies], axis = 1)
-    data.drop([catName], inplace=True, axis=1)
-    return data
-
-#%% Categorical Features
-categorical_features = ["DAY_WE_DS", "TPER_TEAM", "TPER_HOUR"]
-for s in categorical_features :
-    train_data = toCategorical(train_data, s)
     
 #%% Feature Selection
     
