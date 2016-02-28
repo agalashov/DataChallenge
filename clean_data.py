@@ -60,8 +60,15 @@ def new_features(data) :
 
 train_data = new_features(train_data)
 train_data.to_csv("clear_data.csv", sep=";", index=False)
+
+#%% TO CATEGORISE ASS_ASSIGNMENT, Call for:
+train_data = toCategorical(train_data, "ASS_ASSIGNMENT" )
+
+
 #%%
 temp_data = train_data[:100011]
+
+#
 
 #%%%  TESTING
 
